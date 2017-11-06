@@ -1,0 +1,27 @@
+group 'com.will'
+version '1.0'
+
+apply plugin: 'java'
+apply plugin: 'war'
+
+sourceCompatibility = 1.8
+
+def createDir = {
+    path ->
+        File dir  = new File(path);
+        if(!dir.exists()){
+            dir.mkdirs();
+        }
+}
+task makeWebDir(){
+    def paths = ['src/main/webapp/WEB-INF','src/main/webapp/WEB-INF/lib','src/main/webapp/META-INF']
+    paths.forEach(createDir)
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile fileTree(dir: 'WebRoot/WEB-INF/lib', include: '*.jar')
+}
