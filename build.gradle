@@ -3,9 +3,10 @@ version '1.0'
 
 apply plugin: 'java'
 apply plugin: 'war'
-apply plugin: 'idea'
 
 sourceCompatibility = 1.8
+
+def springVersion="4.3.7.RELEASE"
 
 def createDir = {
     path ->
@@ -15,7 +16,7 @@ def createDir = {
         }
 }
 task makeWebDir(){
-    def paths = ['src/main/webapp/WEB-INF','src/main/webapp/WEB-INF/lib','src/main/webapp/META-INF']
+    def paths = ['src/main/webapp/WEB-INF', 'src/main/webapp/resources']
     paths.forEach(createDir)
 }
 
@@ -25,9 +26,37 @@ task wrapper(type : Wrapper){
 
 
 repositories {
+    maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
     mavenCentral()
 }
 
 dependencies {
-    compile fileTree(dir: 'WebRoot/WEB-INF/lib', include: '*.jar')
+
+    providedCompile group: 'javax.servlet', name: 'javax.servlet-api', version: '3.1.0'
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+
+    compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.38'
+    compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
+
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.8.7'
+    compile 'commons-collections:commons-collections:3.2'
+    compile 'c3p0:c3p0:0.9.1.2'
+    compile 'net.coobird:thumbnailator:0.4.8'
+
+    //mybatis
+    compile 'org.mybatis:mybatis:3.4.2',
+            'org.mybatis:mybatis-spring:1.3.1'
+
+    //srping framework
+    compile "org.springframework:spring-core:$springVersion",
+            "org.springframework:spring-beans:$springVersion",
+            "org.springframework:spring-context:$springVersion",
+            "org.springframework:spring-jdbc:$springVersion",
+            "org.springframework:spring-tx:$springVersion",
+            "org.springframework:spring-web:$springVersion",
+            "org.springframework:spring-webmvc:$springVersion",
+            "org.springframework:spring-test:$springVersion"
+
+
+
 }
