@@ -44,7 +44,7 @@ $(function() {
 						window.location.href = '/o2o/frontend/index';
 					} else {
 						// 若用户是在店家管理系统页面则自动回退到店铺列表页中
-						window.location.href = '/o2o/shopadmin/shoplist';
+						window.location.href = '/o2o/shopAdmin/shoplist';
 					}
 				} else {
 					$.toast('提交失败！' + data.errMsg);
@@ -55,6 +55,6 @@ $(function() {
 	});
 
 	$('#back').click(function() {
-		window.location.href = '/o2o/shopadmin/shoplist';
+		window.location.href = '/o2o/shopAdmin/shoplist';
 	});
 });

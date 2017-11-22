@@ -3,7 +3,7 @@ package com.will.o2o.util;
 import java.io.File;
 
 public class PathUtil {
-    private static String separator = File.pathSeparator;
+    private static String separator = File.separator;
 
     //also can get file separator with this method;
     //private static String separator = System.getProperty("file.separator");

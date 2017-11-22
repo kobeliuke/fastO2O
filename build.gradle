@@ -42,6 +42,7 @@ dependencies {
     compile 'commons-collections:commons-collections:3.2'
     compile 'c3p0:c3p0:0.9.1.2'
     compile 'net.coobird:thumbnailator:0.4.8'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.8.7'
 
     //mybatis
     compile 'org.mybatis:mybatis:3.4.2',

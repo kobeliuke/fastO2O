@@ -1,8 +1,8 @@
 $(function() {
 	// 获取此店铺下的商品列表的URL
-	var listUrl = '/o2o/shopadmin/getproductlistbyshop?pageIndex=1&pageSize=999';
+	var listUrl = '/o2o/shopAdmin/getproductlistbyshop?pageIndex=1&pageSize=999';
 	// 商品下架URL
-	var statusUrl = '/o2o/shopadmin/modifyproduct';
+	var statusUrl = '/o2o/shopAdmin/modifyproduct';
 	getList();
 	/**
 	 * 获取此店铺下的商品列表
@@ -71,7 +71,7 @@ $(function() {
 						var target = $(e.currentTarget);
 						if (target.hasClass('edit')) {
 							// 如果有class edit则点击就进入店铺信息编辑页面，并带有productId参数
-							window.location.href = '/o2o/shopadmin/productoperation?productId='
+							window.location.href = '/o2o/shopAdmin/productoperation?productId='
 									+ e.currentTarget.dataset.id;
 						} else if (target.hasClass('status')) {
 							// 如果有class status则调用后台功能上/下架相关商品，并带有productId参数
