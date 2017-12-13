@@ -21,6 +21,13 @@
         <property name="suffix" value=".html"></property>
     </bean>
 
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="defaultEncoding" value="utf-8"></property>
+        <!-- 1024 * 1024 * 20 = 20M-->
+        <property name="maxUploadSize"   value="20971520"></property>
+        <property name="maxInMemorySize" value="20971520"></property>
+    </bean>
+
     <context:component-scan base-package="com.will.o2o.web" />
 
 </beans>

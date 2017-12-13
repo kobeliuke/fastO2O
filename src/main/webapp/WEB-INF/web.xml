@@ -17,4 +17,61 @@
         <servlet-name>spring-dispatcher</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Kaptcha</servlet-name>
+        <servlet-class>com.google.code.kaptcha.servlet.KaptchaServlet</servlet-class>
+        <!--have border-->
+        <init-param>
+            <param-name>kaptcha.border</param-name>
+            <param-value>no</param-value>
+        </init-param>
+        <!--font color-->
+        <init-param>
+            <param-name>kaptcha.textproducer.font.color</param-name>
+            <param-value>red</param-value>
+        </init-param>
+        <!--image width-->
+        <init-param>
+            <param-name>kaptcha.image.width</param-name>
+            <param-value>135</param-value>
+        </init-param>
+        <!--image width-->
+        <init-param>
+            <param-name>kaptcha.image.height</param-name>
+            <param-value>50</param-value>
+        </init-param>
+        <!--character collection-->
+        <init-param>
+            <param-name>kaptcha.testproducer.char.string</param-name>
+            <param-value>ACDEFHKPRSTWX345679</param-value>
+        </init-param>
+        <!--font size-->
+        <init-param>
+            <param-name>kaptcha.testproducer.font.size</param-name>
+            <param-value>43</param-value>
+        </init-param>
+
+        <!--disruption -->
+        <init-param>
+            <param-name>kaptcha.noise.color</param-name>
+            <param-value>black</param-value>
+        </init-param>
+        <!--check code size-->
+        <init-param>
+            <param-name>kaptcha.textproducer.char.length</param-name>
+            <param-value>4</param-value>
+        </init-param>
+        <!--font name-->
+        <init-param>
+            <param-name>kaptcha.textproducer.font.names</param-name>
+            <param-value>Arial</param-value>
+        </init-param>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Kaptcha</servlet-name>
+        <url-pattern>/Kaptcha</url-pattern>
+    </servlet-mapping>
+
+ 
 </web-app>

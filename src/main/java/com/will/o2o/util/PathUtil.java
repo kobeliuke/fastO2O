@@ -22,7 +22,7 @@ public class PathUtil {
         return basePath;
     }
 
-    public static String getShopImgPath(long shopId) {
+    public static String getShopRelativeImgPath(long shopId) {
         String imgPath = "/upload/items/shop/" + shopId + "/";
         return imgPath.replace("/", separator);
     }

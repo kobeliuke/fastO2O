@@ -62,6 +62,20 @@ public class ImageUtil {
         return relativePathName;
     }
 
+    public static void deleteFileOrPath(String path) {
+        File file = new File(PathUtil.getImgBasePath() + path);
+        if (file.exists()) {
+            if (file.isDirectory()) {
+                File files[] = file.listFiles();
+                for (int i = 0; i < files.length; i++) {
+                    files[i].delete();
+                }
+            }
+            file.delete();
+        }
+
+    }
+
 
     //fileName: yyyy-MM-dd-hh-mm-ss + xxxxx
     private static String getRandomFileName() {

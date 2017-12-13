@@ -41,4 +41,29 @@ public class ShopServiceTest extends BaseTest {
         System.out.println(shopExecution.getStateInfo());
     }
 
+    @Test
+    public void modifyShopTest(){
+        Shop shop = new Shop();
+        shop.setShopId(5L);
+        shop.setShopDesc("双十一买娃娃松打气筒");
+        File imgFile = new File("/Users/willliu/Downloads/id_card_front.jpeg");
+        ShopExecution shopExecution = shopService.modifyShop(shop,imgFile);
+        System.out.println(shopExecution.getShop().getShopDesc());
+    }
+    @Test
+    public void simpleTest(){
+        File imgFile = new File("/Users/willliu/Downloads/id_card_front.jpeg");
+        System.out.println(imgFile.exists());
+    }
+    @Test
+    public void testSimple(){
+        for(int i = 0; i< 5000; i++){
+            String s1 = "hello";
+        }
+
+        String str1  = new String("SEU") + new String("Calvin");
+        System.out.println(str1 == "SEUCalvin");
+        System.out.println(str1.intern()==str1);
+
+    }
 }

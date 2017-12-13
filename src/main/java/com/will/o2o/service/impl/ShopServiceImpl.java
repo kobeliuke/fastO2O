@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.File;
+import java.io.InputStream;
 import java.util.Date;
 
 @Service
@@ -26,7 +27,7 @@ public class ShopServiceImpl implements ShopService {
 
     @Override
     @Transactional
-    public ShopExecution addShop(Shop shop, File shopImg) {
+    public ShopExecution addShop(Shop shop, File shopImg) throws ShopOperationException {
         if (shop == null) {
             return new ShopExecution(ShopStateEnum.NULL_SHOP);
         }
@@ -61,9 +62,45 @@ public class ShopServiceImpl implements ShopService {
 
     }
 
+    @Override
+    @Transactional
+    public ShopExecution modifyShop(Shop shop, File shopImgFile) throws ShopOperationException {
+        try {
+            if (shop == null || shop.getShopId() == null) {
+                return new ShopExecution(ShopStateEnum.NULL_SHOP);
+            }
+            //1.have new picture?
+            if (shopImgFile != null) {
+                Shop oldShop = shopDao.queryByShopId(shop.getShopId());
+                if (oldShop.getShopImg() != null) {
+                    ImageUtil.deleteFileOrPath(oldShop.getShopImg());
+                }
+                addShopImg(shop, shopImgFile);
+
+            }
+
+            //2.update shop info
+            shop.setLastEditTime(new Date());
+            int effectedNum = shopDao.updateShop(shop);
+            if (effectedNum <= 0) {
+                return new ShopExecution(ShopStateEnum.INNER_ERROR);
+            } else {
+                shop = shopDao.queryByShopId(shop.getShopId());
+                return new ShopExecution(ShopStateEnum.SUCCESS, shop);
+            }
+        } catch (Exception e) {
+            throw new ShopOperationException("modifyShop error:" + e.getMessage());
+        }
+    }
+
+    @Override
+    public Shop getShopById(long shopId) {
+        return shopDao.queryByShopId(shopId);
+    }
+
     private void addShopImg(Shop shop, File shopImg) {
         //get the img relative path  .../img/upload/
-        String imgPath = PathUtil.getShopImgPath(shop.getShopId());
+        String imgPath = PathUtil.getShopRelativeImgPath(shop.getShopId());
         //get the img position .../img/upload/
         String imgPosition = ImageUtil.generateThumbnail(shopImg, imgPath);
         shop.setShopImg(imgPosition);
