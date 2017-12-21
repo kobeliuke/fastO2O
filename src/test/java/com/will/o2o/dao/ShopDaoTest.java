@@ -10,11 +10,35 @@ import org.springframework.beans.factory.annotation.Autowired;
 import static org.junit.Assert.assertEquals;
 
 import java.util.Date;
+import java.util.List;
 
 public class ShopDaoTest extends BaseTest {
 
     @Autowired
     private ShopDao shopDao;
+
+
+    @Test
+    public void testQueryShopList(){
+        Shop shopCondition = new Shop();
+        UserInfo owner = new UserInfo();
+        Area area = new Area();
+        ShopCategory shopCategory = new ShopCategory();
+
+        shopCondition.setOwner(owner);
+        shopCondition.setArea(area);
+        shopCondition.setShopCategory(shopCategory);
+        owner.setUserId(1L);
+        shopCategory.setShopCategoryId(1L);
+        area.setAreaId(1);
+
+        List<Shop> shopList = shopDao.queryShopList(shopCondition,0,5);
+        int shopCount = shopDao.queryShopCount(shopCondition);
+        System.out.println(shopCount);
+
+        System.out.println(shopList.size());
+
+    }
 
     @Test
     public void testInsertShop(){

@@ -18,6 +18,26 @@ public class ShopServiceTest extends BaseTest {
     @Autowired
     ShopService shopService;
 
+
+    @Test
+    public void getShopListTest(){
+        Shop shopCondition = new Shop();
+        UserInfo owner = new UserInfo();
+        Area area = new Area();
+        ShopCategory shopCategory = new ShopCategory();
+
+        shopCondition.setOwner(owner);
+        shopCondition.setArea(area);
+        shopCondition.setShopCategory(shopCategory);
+        owner.setUserId(1L);
+        //shopCategory.setShopCategoryId(1L);
+        //area.setAreaId(1);
+
+        ShopExecution shopExecution = shopService.getShopList(shopCondition,1,3);
+        System.out.println(shopExecution.getCount());
+        System.out.println(shopExecution.getShopList().size());
+    }
+
     @Test
     public void addShopTest(){
 
